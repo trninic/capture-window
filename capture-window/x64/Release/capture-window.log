@@ -1,11 +1,11 @@
 ﻿  capture-window.cpp
-d:\my developments\github\capture-window\capture-window\mag_capture.cpp(173): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-d:\my developments\github\capture-window\capture-window\mag_capture.cpp(244): warning C4146: unary minus operator applied to unsigned type, result still unsigned
-capture-window.cpp(69): warning C4244: '=': conversion from 'SIZE_T' to 'int', possible loss of data
-capture-window.cpp(73): warning C4267: '=': conversion from 'size_t' to 'DWORD', possible loss of data
+d:\my developments\github\capture window\capture-window\mag_capture.cpp(148): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+d:\my developments\github\capture window\capture-window\mag_capture.cpp(204): warning C4146: unary minus operator applied to unsigned type, result still unsigned
+capture-window.cpp(58): warning C4244: '=': conversion from 'SIZE_T' to 'int', possible loss of data
+capture-window.cpp(62): warning C4267: '=': conversion from 'size_t' to 'DWORD', possible loss of data
   Generating code
-  3 of 192 functions ( 1.6%) were compiled, the rest were copied from previous compilation.
-    1 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+  78 of 193 functions (40.4%) were compiled, the rest were copied from previous compilation.
+    38 functions were new in current compilation
+    2 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   capture-window.vcxproj -> C:\msys64\home\Gil\gimp-devel-GIL\gimp\plug-ins\screenshot\capture-window.exe

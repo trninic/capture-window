@@ -1,53 +1,42 @@
 
 
 #include "stdafx.h"
-
-
 #include <iostream>
 #include <ole2.h>
 #include <olectl.h>
 #include <sstream>
 #include <Shlwapi.h>
-
+#include <stdlib.h>
 
 #include "easy_macros.h"
 #include "init_console.h"
-
-
-
 #include "initialize.root_win.cpp"
 
-#define ONLY_CAPTURE_AND_SAVE 0
-#if ONLY_CAPTURE_AND_SAVE
+#define DEBUG_TEST_CAPTURE 0
+#if DEBUG_TEST_CAPTURE
 	#include "save_bitmap.cpp"
-	#include "bitblt_capture.cpp"
 #endif
-
 
 #include "mag_capture.cpp"
 #include "common_functions.cpp"
 #include "capture-window_common_structs.h"
 
 
-
 int main(int argc, char *argv[])
 {
 	initialize_rootwin(); // We need to init window system for it to work...
-
 	magCapture::Initialize(); // Init the capture system 
 
+#if DEBUG_TEST_CAPTURE
 
-
-
-#if ONLY_CAPTURE_AND_SAVE
-	if (argc != 2) return 0;
-
-	hwndCapTarget = StringToHwnd(argv[1]);
+	HWND hwndCapTarget = (HWND)0x00B40830;
 	HBITMAP bitmapCapture = magCapture::CaptureWindow(hwndCapTarget);
 
 	saveBitmap("test.bmp", bitmapCapture);
+
+	
 #else
-	if (argc != 3) return 0;
+	if (argc != 3) return EXIT_FAILURE;
 
 	
 	HWND hwndCaller = StringToHwnd(argv[1]);  // Get the HWND of the caller process, we send the captured data to the HWND
@@ -56,7 +45,7 @@ int main(int argc, char *argv[])
 	MAGIMAGEHEADER magInfo; 
 	byte *capturedPixels = magCapture::CaptureWindowPixels(hwndCapTarget, &magInfo);
 
-	if (!capturedPixels) return 0; // On error exit
+	if (!capturedPixels) return EXIT_FAILURE; 
 
 
 	// Send the captured pixels to the caller process (using it's hwndCaller)
@@ -74,11 +63,12 @@ int main(int argc, char *argv[])
 	stCOPYDATASTRUCT.lpData = imageSendData;
 	SendMessage(hwndCaller, WM_COPYDATA, COMMON_STRUCTS_CAPTURE_PIXELSDATA, (LPARAM)&stCOPYDATASTRUCT);
 
-#endif
 
+
+#endif
 	magCapture::UnInitialize();
 
-    return 0;
+    return EXIT_SUCCESS;
 }
 
 
