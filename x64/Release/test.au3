@@ -1,0 +1,3 @@
+
+
+ShellExecute('capture-window.exe')
